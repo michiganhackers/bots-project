@@ -16,10 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var glo;
 var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+
     },
 
     // deviceready Event Handler
@@ -28,6 +30,22 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        nfc.addTagDiscoveredListener(function() {
+            alert("saw a tag")
+        });
+        nfc.addNdefListener(function(tag) {
+            glo = tag
+            var s = ""
+            var a = glo.tag.ndefMessage[0].payload;
+            for (var i = 1; i < a.length; i++) {
+                s += String.fromCharCode(a[i])
+            }
+            alert(s)
+        }, function() {
+            alert("successfully started")
+        }, function() {
+            alert("error conenction")
+        });
     },
 
     // Update DOM on a Received Event
@@ -40,7 +58,17 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
 };
 
+function random() {
+    var message = [
+        ndef.textRecord("hello, world")
+    ];
+    nfc.share(message, function(){
+        alert("sent a tag using share")
+    }), function(){
+        alert("error in sending tag share")
+    };
+}
 app.initialize();
