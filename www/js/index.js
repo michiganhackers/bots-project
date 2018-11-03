@@ -17,6 +17,7 @@
  * under the License.
  */
 var glo;
+var isZombie;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -30,14 +31,32 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        nfc.addTagDiscoveredListener(function() {
+            alert("saw a tag")
+        });
         nfc.addNdefListener(function(tag) {
             glo = tag
             var s = ""
+            var g = 0
+            var z = 0
             var a = glo.tag.ndefMessage[0].payload;
+            
             for (var i = 3; i < a.length; i++) {
                 s += String.fromCharCode(a[i])
             }
+
+            z = s[s.length - 1]
+
+            for (var i = 0; i < s.length - 1; i++) {
+                g += s[i]
+            }
+
+            alert(z)
             alert(s)
+        }, function() {
+            alert("successfully started")
+        }, function() {
+            alert("error conenction")
         });
     },
 
@@ -59,9 +78,9 @@ function random() {
         ndef.textRecord("hello, world")
     ];
     nfc.share(message, function(){
-        alert("You are now infected!")
+        alert("sent a tag using share")
     }), function(){
-        alert("An error occured")
+        alert("error in sending tag share")
     };
 }
 app.initialize();
