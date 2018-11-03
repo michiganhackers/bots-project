@@ -25,4 +25,5 @@
     </platform>
     <engine name="browser" spec="^5.0.4" />
     <engine name="android" spec="^6.0.0" />
+    <plugin name="phonegap-nfc" spec="^1.0.3" />
 </widget>
