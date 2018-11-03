@@ -17,6 +17,7 @@
  * under the License.
  */
 var glo;
+var isZombie;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -36,10 +37,21 @@ var app = {
         nfc.addNdefListener(function(tag) {
             glo = tag
             var s = ""
+            var g = 0
+            var z = 0
             var a = glo.tag.ndefMessage[0].payload;
-            for (var i = 1; i < a.length; i++) {
+            
+            for (var i = 3; i < a.length; i++) {
                 s += String.fromCharCode(a[i])
             }
+
+            z = s[s.length - 1]
+
+            for (var i = 0; i < s.length - 1; i++) {
+                g += s[i]
+            }
+
+            alert(z)
             alert(s)
         }, function() {
             alert("successfully started")
