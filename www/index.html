@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="framework7/css/framework7.min.css">
     <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/app.css">
+
 </head>
 
 <body>
@@ -88,6 +89,18 @@
                         <div class="row">
                             <a href="#" class="col button button-raised button-fill popup-open" data-popup="#my-popup">Create Game</a>
                         </div>
+                        <br>
+                        <div class="row">
+                            <a href="#" class="col button button-raised button-fill popup-open" onclick="localStorage.clear()">Clear Storage (safe)</a>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <a href="#" class="col button button-raised button-fill popup-open" onclick="alert(localStorage.getItem('game'))">View Storage (safe)</a>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <a href="#" class="col button button-raised button-fill popup-open" onclick="localStorage.setItem('game', '0')">Become Human (safe)</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,21 +136,19 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" style="margin: 0 14px" class="col button button-raised button-fill popup-close">Create Game</a>
+                    <a href="#" style="margin: 0 14px" onclick="createGame()" class="col button button-raised button-fill popup-close">Create Game</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Cordova -->
-    <!--
   <script src="cordova.js"></script>
-  -->
     <!-- Framework7 library -->
     <script src="framework7/js/framework7.min.js"></script>
     <!-- App routes -->
     <script src="js/routes.js"></script>
     <!-- Your custom app scripts -->
     <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
