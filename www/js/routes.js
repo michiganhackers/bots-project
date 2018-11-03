@@ -13,7 +13,7 @@ routes = [
   },
   // Page Loaders & Router
   {
-    path: '/page-loader-template7/:user/:userId/:posts/:postId/',
+    path: '/page-loader-template7/:status/:gameID/',
     templateUrl: './pages/page-loader-template7.html',
   },
   {
